@@ -1,210 +1,286 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚠️ WARNING: SYSTEM PENETRATED</title>
+    <title>CRITICAL SYSTEM ERROR - DEVICE COMPROMISED</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            background-color: #050505;
-            color: #00ff66;
+            background-color: #000;
+            color: #ff0000;
             font-family: 'Courier New', Courier, monospace;
+            padding: 20px;
+            user-select: none;
+        }
+
+        .alert-top {
+            background-color: #ff0000;
+            color: #000;
+            font-weight: bold;
+            text-align: center;
+            padding: 12px;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            animation: blink 0.6s infinite alternate;
+        }
+
+        @keyframes blink {
+            from { opacity: 1; }
+            to { opacity: 0.3; }
+        }
+
+        .hacker-box {
+            max-width: 700px;
+            margin: 30px auto;
+            border: 2px solid #ff0000;
+            padding: 25px;
+            background: #050000;
+            box-shadow: 0 0 35px rgba(255, 0, 0, 0.7);
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #ff0000;
+            text-align: center;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #ff0000;
+            text-transform: uppercase;
+        }
+
+        .data-panel {
+            background: #110000;
+            border: 1px dashed #ff0000;
             padding: 15px;
+            margin: 20px 0;
+            font-size: 0.95rem;
+            color: #00ff00;
+            line-height: 1.8;
+            text-align: left;
+            direction: ltr;
+        }
+
+        .data-panel span { color: #ffffff; font-weight: bold; }
+
+        .evidence-section {
+            margin: 20px 0;
             text-align: center;
         }
 
-        .alert-banner {
-            background-color: #ff0000;
-            color: #ffffff;
-            font-weight: bold;
-            padding: 10px;
+        .evidence-title {
+            color: #ffff00;
             font-size: 1rem;
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            z-index: 1000;
-            box-shadow: 0 0 15px #ff0000;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
         }
 
-        .dashboard {
-            max-width: 650px;
-            margin: 60px auto 20px auto;
-            border: 2px solid #ff0000;
-            border-radius: 12px;
-            padding: 20px;
-            background: rgba(10, 0, 0, 0.9);
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
-        }
-
-        h1 { color: #ff3333; font-size: 1.6rem; margin-bottom: 10px; text-shadow: 0 0 8px #ff0000; }
-        
-        .info-box {
-            background: #111;
-            border: 1px solid #333;
-            padding: 10px;
-            border-radius: 8px;
-            margin: 15px 0;
-            font-size: 0.9rem;
-            color: #00ffcc;
-            text-align: right;
-        }
-
-        /* معرض الصور */
-        .gallery-box {
+        .gallery {
             position: relative;
-            border: 2px solid #ff3333;
-            border-radius: 8px;
-            overflow: hidden;
-            margin: 15px 0;
+            border: 2px solid #ff0000;
             background: #000;
             min-height: 250px;
+            max-height: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
-        .gallery-box img {
+        .gallery img {
             width: 100%;
-            max-height: 350px;
+            max-height: 380px;
             object-fit: contain;
             display: none;
         }
 
-        .gallery-box img.active { display: block; }
+        .gallery img.active { display: block; }
 
-        .nav-btn {
-            background: rgba(255, 0, 0, 0.7);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            cursor: pointer;
-            font-weight: bold;
-            margin: 5px;
-            border-radius: 5px;
+        .gallery-controls {
+            margin-top: 10px;
         }
 
-        .controls { margin: 15px 0; }
-        .action-btn {
+        .g-btn {
             background: #ff0000;
-            color: #fff;
+            color: #000;
             border: none;
-            padding: 10px 18px;
-            margin: 5px;
-            font-family: inherit;
+            padding: 8px 16px;
             font-weight: bold;
-            border-radius: 5px;
+            font-family: inherit;
             cursor: pointer;
-            box-shadow: 0 0 10px #ff0000;
+            margin: 0 5px;
         }
 
-        .terminal {
+        .timer-container {
+            text-align: center;
+            margin: 25px 0;
+            border-top: 1px solid #330000;
+            padding-top: 15px;
+        }
+
+        .timer-label {
+            color: #ff6666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .timer {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: #ff0000;
+            text-shadow: 0 0 15px #ff0000;
+            margin-top: 5px;
+        }
+
+        .terminal-log {
             background: #000;
+            border: 1px solid #00ff00;
             color: #00ff00;
+            font-size: 0.8rem;
+            height: 120px;
+            overflow-y: auto;
             padding: 10px;
             text-align: left;
             direction: ltr;
-            height: 100px;
-            overflow-y: auto;
-            font-size: 0.8rem;
-            border: 1px solid #00ff00;
-            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        .footer-warning {
+            color: #888;
+            font-size: 0.75rem;
+            text-align: center;
             margin-top: 15px;
         }
     </style>
 </head>
 <body>
 
-    <div class="alert-banner">
-        ⚠️ CRITICAL SECURITY WARNING: SYSTEM BREACH DETECTED ☢️
+    <div class="alert-top">
+        SYSTEM COMPROMISED - ALL FILES ENCRYPTED (AES-256)
     </div>
 
-    <div class="dashboard">
-        <h1>☢️ شاشة التتبع والتهديد الأمني</h1>
-        <p style="color: #aaa; font-size: 0.9rem;">تم التقاط وتوثيق الأدلة التالية من أجهزة النظام:</p>
+    <div class="hacker-box">
+        <h1>YOUR DEVICE HAS BEEN HACKED</h1>
+        
+        <p style="text-align: center; color: #cccccc; font-size: 0.9rem;">
+            Your personal photos, documents, and system logs have been exfiltrated to our remote server.
+        </p>
 
-        <!-- معلومات الموقع والزوار الحية -->
-        <div class="info-box">
-            🌐 <b>عنوان الـ IP الخاص بك:</b> <span id="user-ip">جاري الفحص...</span><br>
-            📍 <b>الموقع الجغرافي:</b> <span id="user-location">جاري تحديد الموقع...</span><br>
-            👁️ <b>عدد المحاولات والمشاهدات:</b> <span id="visitor-count" style="color:#ff0000; font-weight:bold;">1,429</span>
+        <!-- كشف بيانات الضحية الحقيقية -->
+        <div class="data-panel">
+            > TARGET_IP: <span id="ip">FETCHING...</span><br>
+            > LOCATION: <span id="location">LOCATING...</span><br>
+            > OS_PLATFORM: <span id="os">DETECTING...</span><br>
+            > STATUS: <span style="color:#ff0000;">ENCRYPTED & DUMPED</span>
         </div>
 
-        <!-- معرض الصور المجهزة بأسماء ملفاتك -->
-        <div class="gallery-box">
-            <img src="3.JPG" class="active" alt="دليل 1" onerror="this.src='3.jpg'">
-            <img src="4.JPG" alt="دليل 2" onerror="this.src='4.jpg'">
-            <img src="5.WEBP" alt="دليل 3" onerror="this.src='5.webp'">
-            <img src="6.JPG" alt="دليل 4" onerror="this.src='6.jpg'">
-            <img src="7.PNG" alt="دليل 5" onerror="this.src='7.png'">
+        <!-- معرض الصور المسربة (الأدلة) -->
+        <div class="evidence-section">
+            <div class="evidence-title">EXFILTRATED MEDIA (EXCERPT):</div>
+            <div class="gallery">
+                <img src="3.JPG" class="active" onerror="this.src='3.jpg'">
+                <img src="4.JPG" onerror="this.src='4.jpg'">
+                <img src="5.WEBP" onerror="this.src='5.webp'">
+                <img src="6.JPG" onerror="this.src='6.jpg'">
+                <img src="7.PNG" onerror="this.src='7.png'">
+            </div>
+            <div class="gallery-controls">
+                <button class="g-btn" onclick="prevSlide()">PREV EVIDENCE</button>
+                <button class="g-btn" onclick="nextSlide()">NEXT EVIDENCE</button>
+            </div>
         </div>
 
-        <div>
-            <button class="nav-btn" onclick="changeSlide(-1)">❮ الصورة السابقة</button>
-            <button class="nav-btn" onclick="changeSlide(1)">الصورة التالية ❯</button>
+        <!-- عداد التهديد التنازلي -->
+        <div class="timer-container">
+            <div class="timer-label">TIME REMAINING UNTIL PUBLIC LEAK & DATA ERASURE:</div>
+            <div class="timer" id="clock">09:59</div>
         </div>
 
-        <!-- خيارات الأزرار التفاعلية -->
-        <div class="controls">
-            <button class="action-btn" onclick="runScan()">🔍 فحص أمان الجهاز</button>
-            <button class="action-btn" style="background:#0088ff; box-shadow: 0 0 10px #0088ff;" onclick="cancelAlert()">🛡️ إيقاف التهديد</button>
+        <!-- شاشة أوامر حية تشبه السيرفر -->
+        <div class="terminal-log" id="term">
+            [+] System root bypass successful.<br>
+            [+] Mirroring memory buffer to remote host...<br>
+            [+] Extracting camera rolls and application caches...<br>
         </div>
 
-        <!-- شاشة أوامر حية Terminal -->
-        <div class="terminal" id="term-log">
-            > System initialization complete...<br>
-            > Scanning inbound traffic...<br>
-            > Target located. Tracking position...<br>
+        <div class="footer-warning">
+            DO NOT CLOSE THIS PAGE. CLOSING WILL INITIATE IMMEDIATE WIPEOUT PROCEDURE.
         </div>
     </div>
 
     <script>
-        // 1. التنقل بين الصور
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.gallery-box img');
-
-        function changeSlide(direction) {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + direction + slides.length) % slides.length;
-            slides[currentSlide].classList.add('active');
-            logTerminal(`Switching evidence frame to #${currentSlide + 1}`);
-        }
-
-        // 2. تجديد التيرمينال
-        function logTerminal(text) {
-            const term = document.getElementById('term-log');
-            term.innerHTML += `> ${text}<br>`;
-            term.scrollTop = term.scrollHeight;
-        }
-
-        // 3. جلب الـ IP والموقع الجغرافي الحقيقي
+        // 1. جلب بيانات الزائر الحقيقية لجعله يصدّق
         fetch('https://ipapi.co/json/')
             .then(res => res.json())
             .then(data => {
-                document.getElementById('user-ip').innerText = data.ip || '192.168.1.101';
-                document.getElementById('user-location').innerText = `${data.city || 'القاهرة'}, ${data.country_name || 'مصر'}`;
-                logTerminal(`Target IP verified: ${data.ip}`);
-                logTerminal(`Geolocated at: ${data.city}`);
+                document.getElementById('ip').innerText = data.ip || '192.168.1.108';
+                document.getElementById('location').innerText = `${data.city || 'Cairo'}, ${data.country_name || 'Egypt'}`;
+                addLog(`[+] IP Confirmed: ${data.ip}`);
+                addLog(`[+] Geolocation synced: ${data.city}`);
             })
             .catch(() => {
-                document.getElementById('user-ip').innerText = '192.168.1.105';
-                document.getElementById('user-location').innerText = 'تم التحديد تلقائياً';
+                document.getElementById('ip').innerText = '197.38.12.91';
+                document.getElementById('location').innerText = 'LOCAL NET';
             });
 
-        // 4. عداد زوار تفاعلي
-        let visits = 1429;
+        document.getElementById('os').innerText = navigator.platform || 'iOS / Mobile';
+
+        // 2. التحكم بصفحة الصور
+        let slideIdx = 0;
+        const imgs = document.querySelectorAll('.gallery img');
+
+        function showImg(idx) {
+            imgs.forEach(img => img.classList.remove('active'));
+            imgs[idx].classList.add('active');
+            addLog(`[!] Loading encrypted image stream #${idx + 1}...`);
+        }
+
+        function nextSlide() {
+            slideIdx = (slideIdx + 1) % imgs.length;
+            showImg(slideIdx);
+        }
+
+        function prevSlide() {
+            slideIdx = (slideIdx - 1 + imgs.length) % imgs.length;
+            showImg(slideIdx);
+        }
+
+        // 3. كتابة أسطر أوامر تلقائية مستمرة
+        function addLog(msg) {
+            const term = document.getElementById('term');
+            term.innerHTML += `${msg}<br>`;
+            term.scrollTop = term.scrollHeight;
+        }
+
+        const systemLogs = [
+            "[!] Extracting browser credentials...",
+            "[!] Accessing contacts database...",
+            "[!] Cloud syncing paused by remote admin.",
+            "[+] Packet stream verified. Waiting for operator command..."
+        ];
+
+        let logCounter = 0;
         setInterval(() => {
-            visits += Math.floor(Math.random() * 3) + 1;
-            document.getElementById('visitor-count').innerText = visits.toLocaleString();
-        }, 4000);
+            if(logCounter < systemLogs.length) {
+                addLog(systemLogs[logCounter]);
+                logCounter++;
+            }
+        }, 3500);
 
-        // 5. الأزرار التفاعلية
-        function runScan() {
-            logTerminal("Initiating deep device memory scan...");
-            setTimeout(() => logTerminal("Warning: 3 vulnerabilities found!"), 1000);
-            setTimeout(() => logTerminal("Accessing camera buffer... Done."), 2000);
-        }
+        // 4. العداد التنازلي المرعب (10 دقائق)
+        let totalSecs = 599;
+        const clockEl = document.getElementById('clock');
 
-        function cancelAlert() {
-            alert("تم إبطال المخطط الخطير بنجاح! مجرد دعابة تفاعلية 😉❤️");
-            logTerminal("Alert dismissed by authority user.");
-        }
+        setInterval(() => {
+            if (totalSecs > 0) {
+                totalSecs--;
+                let m = Math.floor(totalSecs / 60);
+                let s = totalSecs % 60;
+                clockEl.innerText = `${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
+            } else {
+                clockEl.innerText = "00:00 - WIPEOUT STARTED";
+            }
+        }, 1000);
     </script>
 </body>
 </html>
