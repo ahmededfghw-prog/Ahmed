@@ -1,286 +1,215 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRITICAL SYSTEM ERROR - DEVICE COMPROMISED</title>
+    <title>معرض الصور والمنصة التفاعلية</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --accent-color: #38bdf8;
+        }
+
+        .light-theme {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #0f172a;
+            --accent-color: #0284c7;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.3s ease; }
+
         body {
-            background-color: #000;
-            color: #ff0000;
-            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: system-ui, -apple-system, sans-serif;
             padding: 20px;
-            user-select: none;
         }
 
-        .alert-top {
-            background-color: #ff0000;
-            color: #000;
-            font-weight: bold;
-            text-align: center;
-            padding: 12px;
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-            animation: blink 0.6s infinite alternate;
-        }
-
-        @keyframes blink {
-            from { opacity: 1; }
-            to { opacity: 0.3; }
-        }
-
-        .hacker-box {
-            max-width: 700px;
-            margin: 30px auto;
-            border: 2px solid #ff0000;
-            padding: 25px;
-            background: #050000;
-            box-shadow: 0 0 35px rgba(255, 0, 0, 0.7);
-            border-radius: 8px;
-        }
-
-        h1 {
-            font-size: 1.8rem;
-            color: #ff0000;
-            text-align: center;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px #ff0000;
-            text-transform: uppercase;
-        }
-
-        .data-panel {
-            background: #110000;
-            border: 1px dashed #ff0000;
-            padding: 15px;
-            margin: 20px 0;
-            font-size: 0.95rem;
-            color: #00ff00;
-            line-height: 1.8;
-            text-align: left;
-            direction: ltr;
-        }
-
-        .data-panel span { color: #ffffff; font-weight: bold; }
-
-        .evidence-section {
-            margin: 20px 0;
-            text-align: center;
-        }
-
-        .evidence-title {
-            color: #ffff00;
-            font-size: 1rem;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-        }
-
-        .gallery {
-            position: relative;
-            border: 2px solid #ff0000;
-            background: #000;
-            min-height: 250px;
-            max-height: 380px;
+        header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            max-width: 1000px;
+            margin: 0 auto 30px auto;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--card-bg);
         }
 
-        .gallery img {
-            width: 100%;
-            max-height: 380px;
-            object-fit: contain;
-            display: none;
-        }
+        h1 { font-size: 1.6rem; color: var(--accent-color); }
 
-        .gallery img.active { display: block; }
-
-        .gallery-controls {
-            margin-top: 10px;
-        }
-
-        .g-btn {
-            background: #ff0000;
-            color: #000;
-            border: none;
+        .theme-btn {
+            background: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--accent-color);
             padding: 8px 16px;
-            font-weight: bold;
-            font-family: inherit;
+            border-radius: 20px;
             cursor: pointer;
-            margin: 0 5px;
-        }
-
-        .timer-container {
-            text-align: center;
-            margin: 25px 0;
-            border-top: 1px solid #330000;
-            padding-top: 15px;
-        }
-
-        .timer-label {
-            color: #ff6666;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-        }
-
-        .timer {
-            font-size: 2.8rem;
             font-weight: bold;
-            color: #ff0000;
-            text-shadow: 0 0 15px #ff0000;
-            margin-top: 5px;
         }
 
-        .terminal-log {
-            background: #000;
-            border: 1px solid #00ff00;
-            color: #00ff00;
-            font-size: 0.8rem;
-            height: 120px;
-            overflow-y: auto;
-            padding: 10px;
-            text-align: left;
-            direction: ltr;
-            margin-top: 15px;
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        .footer-warning {
-            color: #888;
-            font-size: 0.75rem;
+        /* معرض الصور */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            cursor: pointer;
+        }
+
+        .card img:hover { transform: scale(1.03); }
+
+        .card-body { padding: 15px; text-align: center; }
+
+        /* نموذج إرسال الرسائل إلى تلجرام */
+        .contact-box {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-box h2 {
+            margin-bottom: 15px;
+            color: var(--accent-color);
             text-align: center;
-            margin-top: 15px;
         }
+
+        .form-group { margin-bottom: 15px; }
+
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #475569;
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-family: inherit;
+        }
+
+        .send-btn {
+            width: 100%;
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .send-btn:hover { opacity: 0.9; }
     </style>
 </head>
 <body>
 
-    <div class="alert-top">
-        SYSTEM COMPROMISED - ALL FILES ENCRYPTED (AES-256)
-    </div>
+    <header>
+        <h1>🖼️ معرض الصور والمنصة التفاعلية</h1>
+        <button class="theme-btn" onclick="toggleTheme()">🌙 / ☀️ المظهر</button>
+    </header>
 
-    <div class="hacker-box">
-        <h1>YOUR DEVICE HAS BEEN HACKED</h1>
+    <div class="container">
         
-        <p style="text-align: center; color: #cccccc; font-size: 0.9rem;">
-            Your personal photos, documents, and system logs have been exfiltrated to our remote server.
-        </p>
-
-        <!-- كشف بيانات الضحية الحقيقية -->
-        <div class="data-panel">
-            > TARGET_IP: <span id="ip">FETCHING...</span><br>
-            > LOCATION: <span id="location">LOCATING...</span><br>
-            > OS_PLATFORM: <span id="os">DETECTING...</span><br>
-            > STATUS: <span style="color:#ff0000;">ENCRYPTED & DUMPED</span>
-        </div>
-
-        <!-- معرض الصور المسربة (الأدلة) -->
-        <div class="evidence-section">
-            <div class="evidence-title">EXFILTRATED MEDIA (EXCERPT):</div>
-            <div class="gallery">
-                <img src="3.JPG" class="active" onerror="this.src='3.jpg'">
-                <img src="4.JPG" onerror="this.src='4.jpg'">
-                <img src="5.WEBP" onerror="this.src='5.webp'">
-                <img src="6.JPG" onerror="this.src='6.jpg'">
-                <img src="7.PNG" onerror="this.src='7.png'">
+        <!-- شبكة عرض الصور -->
+        <div class="gallery-grid">
+            <div class="card">
+                <img src="3.JPG" alt="صورة 1" onerror="this.src='3.jpg'">
+                <div class="card-body"><h3>صورة #1</h3></div>
             </div>
-            <div class="gallery-controls">
-                <button class="g-btn" onclick="prevSlide()">PREV EVIDENCE</button>
-                <button class="g-btn" onclick="nextSlide()">NEXT EVIDENCE</button>
+            <div class="card">
+                <img src="4.JPG" alt="صورة 2" onerror="this.src='4.jpg'">
+                <div class="card-body"><h3>صورة #2</h3></div>
+            </div>
+            <div class="card">
+                <img src="5.WEBP" alt="صورة 3" onerror="this.src='5.webp'">
+                <div class="card-body"><h3>صورة #3</h3></div>
+            </div>
+            <div class="card">
+                <img src="6.JPG" alt="صورة 4" onerror="this.src='6.jpg'">
+                <div class="card-body"><h3>صورة #4</h3></div>
+            </div>
+            <div class="card">
+                <img src="7.PNG" alt="صورة 5" onerror="this.src='7.png'">
+                <div class="card-body"><h3>صورة #5</h3></div>
             </div>
         </div>
 
-        <!-- عداد التهديد التنازلي -->
-        <div class="timer-container">
-            <div class="timer-label">TIME REMAINING UNTIL PUBLIC LEAK & DATA ERASURE:</div>
-            <div class="timer" id="clock">09:59</div>
+        <!-- قسم أرسل رسالة إلى تلجرام -->
+        <div class="contact-box">
+            <h2>📬 أرسل رسالة مباشرة</h2>
+            <form id="telegram-form">
+                <div class="form-group">
+                    <label for="name">الاسم:</label>
+                    <input type="text" id="name" placeholder="اكتب اسمك هنا..." required>
+                </div>
+                <div class="form-group">
+                    <label for="message">الرسالة:</label>
+                    <textarea id="message" rows="4" placeholder="اكتب رسالتك..." required></textarea>
+                </div>
+                <button type="submit" class="send-btn">إرسال عبر تلجرام 🚀</button>
+            </form>
         </div>
 
-        <!-- شاشة أوامر حية تشبه السيرفر -->
-        <div class="terminal-log" id="term">
-            [+] System root bypass successful.<br>
-            [+] Mirroring memory buffer to remote host...<br>
-            [+] Extracting camera rolls and application caches...<br>
-        </div>
-
-        <div class="footer-warning">
-            DO NOT CLOSE THIS PAGE. CLOSING WILL INITIATE IMMEDIATE WIPEOUT PROCEDURE.
-        </div>
     </div>
 
     <script>
-        // 1. جلب بيانات الزائر الحقيقية لجعله يصدّق
-        fetch('https://ipapi.co/json/')
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById('ip').innerText = data.ip || '192.168.1.108';
-                document.getElementById('location').innerText = `${data.city || 'Cairo'}, ${data.country_name || 'Egypt'}`;
-                addLog(`[+] IP Confirmed: ${data.ip}`);
-                addLog(`[+] Geolocation synced: ${data.city}`);
-            })
-            .catch(() => {
-                document.getElementById('ip').innerText = '197.38.12.91';
-                document.getElementById('location').innerText = 'LOCAL NET';
-            });
-
-        document.getElementById('os').innerText = navigator.platform || 'iOS / Mobile';
-
-        // 2. التحكم بصفحة الصور
-        let slideIdx = 0;
-        const imgs = document.querySelectorAll('.gallery img');
-
-        function showImg(idx) {
-            imgs.forEach(img => img.classList.remove('active'));
-            imgs[idx].classList.add('active');
-            addLog(`[!] Loading encrypted image stream #${idx + 1}...`);
+        // 1. تبديل وضع الليل والنهار
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
         }
 
-        function nextSlide() {
-            slideIdx = (slideIdx + 1) % imgs.length;
-            showImg(slideIdx);
-        }
+        // 2. إرسال الرسالة إلى تلجرام رسميًا باستخدام Bot API
+        document.getElementById('telegram-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const msg = document.getElementById('message').value;
 
-        function prevSlide() {
-            slideIdx = (slideIdx - 1 + imgs.length) % imgs.length;
-            showImg(slideIdx);
-        }
+            // تم إضافة بيانات البوت الخاصة بك
+            const botToken = "8624749284:AAEMvDKtk_N5QR0Iiq3E2DTo5ErKb_dt0fM";
+            const chatId = "1658368856";
 
-        // 3. كتابة أسطر أوامر تلقائية مستمرة
-        function addLog(msg) {
-            const term = document.getElementById('term');
-            term.innerHTML += `${msg}<br>`;
-            term.scrollTop = term.scrollHeight;
-        }
+            const text = `📬 رسالة جديدة من زائر الموقع:\n\n👤 الاسم: ${name}\n💬 الرسالة: ${msg}`;
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
 
-        const systemLogs = [
-            "[!] Extracting browser credentials...",
-            "[!] Accessing contacts database...",
-            "[!] Cloud syncing paused by remote admin.",
-            "[+] Packet stream verified. Waiting for operator command..."
-        ];
-
-        let logCounter = 0;
-        setInterval(() => {
-            if(logCounter < systemLogs.length) {
-                addLog(systemLogs[logCounter]);
-                logCounter++;
-            }
-        }, 3500);
-
-        // 4. العداد التنازلي المرعب (10 دقائق)
-        let totalSecs = 599;
-        const clockEl = document.getElementById('clock');
-
-        setInterval(() => {
-            if (totalSecs > 0) {
-                totalSecs--;
-                let m = Math.floor(totalSecs / 60);
-                let s = totalSecs % 60;
-                clockEl.innerText = `${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
-            } else {
-                clockEl.innerText = "00:00 - WIPEOUT STARTED";
-            }
-        }, 1000);
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.ok) {
+                        alert("تم إرسال رسالتك بنجاح! ✅");
+                        document.getElementById('telegram-form').reset();
+                    } else {
+                        alert("حدث خطأ أثناء الإرسال. يرجى المحاولة لاحقاً.");
+                    }
+                })
+                .catch(() => alert("تعذر الاتصال بالسيرفر."));
+        });
     </script>
 </body>
 </html>
