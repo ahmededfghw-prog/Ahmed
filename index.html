@@ -3,153 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚠️ تحذير أمني عالي الخطورة!</title>
+    <title>⚠️ WARNING: SYSTEM PENETRATED</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            background-color: #0d0000;
-            color: #ff3333;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #050505;
+            color: #00ff66;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 15px;
             text-align: center;
-            padding: 20px;
-            overflow-x: hidden;
         }
 
-        /* شريط متحرك في الأعلى */
-        .marquee {
+        .alert-banner {
             background-color: #ff0000;
-            color: #000;
+            color: #ffffff;
             font-weight: bold;
             padding: 10px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 100;
+            top: 0; left: 0; width: 100%;
+            z-index: 1000;
+            box-shadow: 0 0 15px #ff0000;
         }
 
-        .container {
-            max-width: 600px;
-            margin: 80px auto 20px auto;
+        .dashboard {
+            max-width: 650px;
+            margin: 60px auto 20px auto;
             border: 2px solid #ff0000;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
-            background: rgba(20, 0, 0, 0.85);
+            border-radius: 12px;
+            padding: 20px;
+            background: rgba(10, 0, 0, 0.9);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
         }
 
-        /* أيقونة الإشعاع المتحركة */
-        .radiation-icon {
-            font-size: 80px;
-            animation: pulse 1.2s infinite alternate;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff0000); }
-            100% { transform: scale(1.15); filter: drop-shadow(0 0 20px #ff0000); }
-        }
-
-        h1 {
-            color: #ff1a1a;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px #ff0000;
-        }
-
-        p {
-            color: #ffcccc;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-
-        /* إطار الصورة */
-        .img-box {
-            margin: 20px 0;
-            border: 3px solid #ff0000;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
-        }
-
-        .img-box img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* العداد التنازلي الوهمي */
-        .timer {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #ffff00;
+        h1 { color: #ff3333; font-size: 1.6rem; margin-bottom: 10px; text-shadow: 0 0 8px #ff0000; }
+        
+        .info-box {
+            background: #111;
+            border: 1px solid #333;
+            padding: 10px;
+            border-radius: 8px;
             margin: 15px 0;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px #ffff00;
+            font-size: 0.9rem;
+            color: #00ffcc;
+            text-align: right;
         }
 
-        .alert-btn {
-            background-color: #ff0000;
+        /* معرض الصور */
+        .gallery-box {
+            position: relative;
+            border: 2px solid #ff3333;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 15px 0;
+            background: #000;
+            min-height: 250px;
+        }
+
+        .gallery-box img {
+            width: 100%;
+            max-height: 350px;
+            object-fit: contain;
+            display: none;
+        }
+
+        .gallery-box img.active { display: block; }
+
+        .nav-btn {
+            background: rgba(255, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+            border-radius: 5px;
+        }
+
+        .controls { margin: 15px 0; }
+        .action-btn {
+            background: #ff0000;
             color: #fff;
             border: none;
-            padding: 12px 25px;
-            font-size: 1.1rem;
+            padding: 10px 18px;
+            margin: 5px;
+            font-family: inherit;
             font-weight: bold;
-            border-radius: 8px;
+            border-radius: 5px;
             cursor: pointer;
             box-shadow: 0 0 10px #ff0000;
-            animation: blink 0.8s infinite alternate;
         }
 
-        @keyframes blink {
-            from { opacity: 1; }
-            to { opacity: 0.6; }
+        .terminal {
+            background: #000;
+            color: #00ff00;
+            padding: 10px;
+            text-align: left;
+            direction: ltr;
+            height: 100px;
+            overflow-y: auto;
+            font-size: 0.8rem;
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
 
-    <div class="marquee">
-        ⚠️ تحذير: تم الكشف عن نشاط مشبوه ☢️ خطر للغاية ⚠️ SYSTEM CRITICAL ALERT
+    <div class="alert-banner">
+        ⚠️ CRITICAL SECURITY WARNING: SYSTEM BREACH DETECTED ☢️
     </div>
 
-    <div class="container">
-        <div class="radiation-icon">☢️</div>
-        <h1>خطر! النظام تعرض للاختراق!</h1>
-        <p>تم رصد مصدر الخطورة وضبط الصورة التالية للمتسبب في هذا التنبيه ⚠️</p>
+    <div class="dashboard">
+        <h1>☢️ شاشة التتبع والتهديد الأمني</h1>
+        <p style="color: #aaa; font-size: 0.9rem;">تم التقاط وتوثيق الأدلة التالية من أجهزة النظام:</p>
 
-        <!-- رابط صورتك المحلية -->
-        <div class="img-box">
-            <img src="2.JPG" alt="صورة تحذيرية" onerror="this.src='2.jpg'">
+        <!-- معلومات الموقع والزوار الحية -->
+        <div class="info-box">
+            🌐 <b>عنوان الـ IP الخاص بك:</b> <span id="user-ip">جاري الفحص...</span><br>
+            📍 <b>الموقع الجغرافي:</b> <span id="user-location">جاري تحديد الموقع...</span><br>
+            👁️ <b>عدد المحاولات والمشاهدات:</b> <span id="visitor-count" style="color:#ff0000; font-weight:bold;">1,429</span>
         </div>
 
-        <p>سيتم تدمير البيانات خلال:</p>
-        <div class="timer" id="countdown">00:59</div>
+        <!-- معرض الصور المجهزة بأسماء ملفاتك -->
+        <div class="gallery-box">
+            <img src="3.JPG" class="active" alt="دليل 1" onerror="this.src='3.jpg'">
+            <img src="4.JPG" alt="دليل 2" onerror="this.src='4.jpg'">
+            <img src="5.WEBP" alt="دليل 3" onerror="this.src='5.webp'">
+            <img src="6.JPG" alt="دليل 4" onerror="this.src='6.jpg'">
+            <img src="7.PNG" alt="دليل 5" onerror="this.src='7.png'">
+        </div>
 
-        <button class="alert-btn" onclick="alert('دعابة بسيطة! 😄❤️')">إلغاء الخطر 🛡️</button>
+        <div>
+            <button class="nav-btn" onclick="changeSlide(-1)">❮ الصورة السابقة</button>
+            <button class="nav-btn" onclick="changeSlide(1)">الصورة التالية ❯</button>
+        </div>
+
+        <!-- خيارات الأزرار التفاعلية -->
+        <div class="controls">
+            <button class="action-btn" onclick="runScan()">🔍 فحص أمان الجهاز</button>
+            <button class="action-btn" style="background:#0088ff; box-shadow: 0 0 10px #0088ff;" onclick="cancelAlert()">🛡️ إيقاف التهديد</button>
+        </div>
+
+        <!-- شاشة أوامر حية Terminal -->
+        <div class="terminal" id="term-log">
+            > System initialization complete...<br>
+            > Scanning inbound traffic...<br>
+            > Target located. Tracking position...<br>
+        </div>
     </div>
 
     <script>
-        // كود العداد التنازلي الوهمي
-        let seconds = 59;
-        const countdownEl = document.getElementById('countdown');
-        
-        setInterval(() => {
-            if (seconds > 0) {
-                seconds--;
-                countdownEl.innerText = `00:${seconds < 10 ? '0' : ''}${seconds}`;
-            } else {
-                seconds = 59;
-            }
-        }, 1000);
-    </script>
+        // 1. التنقل بين الصور
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.gallery-box img');
 
+        function changeSlide(direction) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            logTerminal(`Switching evidence frame to #${currentSlide + 1}`);
+        }
+
+        // 2. تجديد التيرمينال
+        function logTerminal(text) {
+            const term = document.getElementById('term-log');
+            term.innerHTML += `> ${text}<br>`;
+            term.scrollTop = term.scrollHeight;
+        }
+
+        // 3. جلب الـ IP والموقع الجغرافي الحقيقي
+        fetch('https://ipapi.co/json/')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('user-ip').innerText = data.ip || '192.168.1.101';
+                document.getElementById('user-location').innerText = `${data.city || 'القاهرة'}, ${data.country_name || 'مصر'}`;
+                logTerminal(`Target IP verified: ${data.ip}`);
+                logTerminal(`Geolocated at: ${data.city}`);
+            })
+            .catch(() => {
+                document.getElementById('user-ip').innerText = '192.168.1.105';
+                document.getElementById('user-location').innerText = 'تم التحديد تلقائياً';
+            });
+
+        // 4. عداد زوار تفاعلي
+        let visits = 1429;
+        setInterval(() => {
+            visits += Math.floor(Math.random() * 3) + 1;
+            document.getElementById('visitor-count').innerText = visits.toLocaleString();
+        }, 4000);
+
+        // 5. الأزرار التفاعلية
+        function runScan() {
+            logTerminal("Initiating deep device memory scan...");
+            setTimeout(() => logTerminal("Warning: 3 vulnerabilities found!"), 1000);
+            setTimeout(() => logTerminal("Accessing camera buffer... Done."), 2000);
+        }
+
+        function cancelAlert() {
+            alert("تم إبطال المخطط الخطير بنجاح! مجرد دعابة تفاعلية 😉❤️");
+            logTerminal("Alert dismissed by authority user.");
+        }
+    </script>
 </body>
 </html>
