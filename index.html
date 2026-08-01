@@ -3,21 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقعي الأول</title>
+    <title>⚠️ تحذير أمني عالي الخطورة!</title>
     <style>
-        body {
-            font-family: system-ui, sans-serif;
-            text-align: center;
-            padding: 50px 20px;
-            background-color: #f4f4f9;
-            color: #333;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-        h1 { color: #2b5296; }
-        p { font-size: 1.2rem; }
+        body {
+            background-color: #0d0000;
+            color: #ff3333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* شريط متحرك في الأعلى */
+        .marquee {
+            background-color: #ff0000;
+            color: #000;
+            font-weight: bold;
+            padding: 10px;
+            font-size: 1.1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 80px auto 20px auto;
+            border: 2px solid #ff0000;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
+            background: rgba(20, 0, 0, 0.85);
+        }
+
+        /* أيقونة الإشعاع المتحركة */
+        .radiation-icon {
+            font-size: 80px;
+            animation: pulse 1.2s infinite alternate;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff0000); }
+            100% { transform: scale(1.15); filter: drop-shadow(0 0 20px #ff0000); }
+        }
+
+        h1 {
+            color: #ff1a1a;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #ff0000;
+        }
+
+        p {
+            color: #ffcccc;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        /* إطار الصورة */
+        .img-box {
+            margin: 20px 0;
+            border: 3px solid #ff0000;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+        }
+
+        .img-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* العداد التنازلي الوهمي */
+        .timer {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffff00;
+            margin: 15px 0;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #ffff00;
+        }
+
+        .alert-btn {
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 0 10px #ff0000;
+            animation: blink 0.8s infinite alternate;
+        }
+
+        @keyframes blink {
+            from { opacity: 1; }
+            to { opacity: 0.6; }
+        }
     </style>
 </head>
 <body>
-    <h1>أهلاً بك في موقعي الأول! 🎉</h1>
-    <p>هذا الموقع تم إنشاؤه ورفعه مجاناً بالكامل.</p>
+
+    <div class="marquee">
+        ⚠️ تحذير: تم الكشف عن نشاط مشبوه ☢️ خطر للغاية ⚠️ SYSTEM CRITICAL ALERT
+    </div>
+
+    <div class="container">
+        <div class="radiation-icon">☢️</div>
+        <h1>خطر! النظام تعرض للاختراق!</h1>
+        <p>تم رصد مصدر الخطورة وضبط الصورة التالية للمتسبب في هذا التنبيه ⚠️</p>
+
+        <!-- رابط صورتك المحلية -->
+        <div class="img-box">
+            <img src="2.JPG" alt="صورة تحذيرية" onerror="this.src='2.jpg'">
+        </div>
+
+        <p>سيتم تدمير البيانات خلال:</p>
+        <div class="timer" id="countdown">00:59</div>
+
+        <button class="alert-btn" onclick="alert('دعابة بسيطة! 😄❤️')">إلغاء الخطر 🛡️</button>
+    </div>
+
+    <script>
+        // كود العداد التنازلي الوهمي
+        let seconds = 59;
+        const countdownEl = document.getElementById('countdown');
+        
+        setInterval(() => {
+            if (seconds > 0) {
+                seconds--;
+                countdownEl.innerText = `00:${seconds < 10 ? '0' : ''}${seconds}`;
+            } else {
+                seconds = 59;
+            }
+        }, 1000);
+    </script>
+
 </body>
 </html>
