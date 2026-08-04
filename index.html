@@ -2,325 +2,472 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0d1117">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#050608">
 
-<title>Digital Archive // OSINT</title>
+<title>CYBER ARCHIVE // SECURE TERMINAL</title>
 
 <style>
-
-:root {
-    --bg: #0d1117;
-    --panel: #161b22;
-    --panel2: #21262d;
-    --border: #30363d;
-    --red: #da3633;
-    --green: #7ee787;
-    --blue: #58a6ff;
-    --text: #c9d1d9;
-    --light: #f0f6fc;
-    --muted: #8b949e;
+:root{
+    --bg:#050608;
+    --panel:#0a0d11;
+    --panel2:#0e1319;
+    --border:#26303a;
+    --red:#ff3030;
+    --red2:#8b0000;
+    --green:#00ff66;
+    --blue:#55aaff;
+    --text:#d8dee5;
+    --muted:#6f7b87;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-body {
-    background: var(--bg);
-    color: var(--text);
-    padding: 15px;
-    font-family: "Courier New", Tahoma, monospace;
+body{
+    background:
+        radial-gradient(circle at center,#111 0%,#050608 55%,#000 100%);
+    color:var(--text);
+    font-family:"Courier New",Tahoma,monospace;
+    min-height:100vh;
+    padding:10px;
+    overflow-x:hidden;
 }
 
-.container {
-    width: 100%;
-    max-width: 950px;
-    margin: auto;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 10px 35px rgba(0,0,0,.55);
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.015) 0px,
+            rgba(255,255,255,.015) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+    z-index:999;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    background:rgba(10,13,17,.97);
+    border:1px solid #303840;
+    box-shadow:
+        0 0 35px rgba(255,0,0,.08),
+        0 20px 60px rgba(0,0,0,.8);
 }
 
 /* HEADER */
 
-header {
-    background: var(--panel2);
-    padding: 15px 20px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
+header{
+    min-height:65px;
+    padding:14px 18px;
+    background:#0c1015;
+    border-bottom:1px solid #333;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
 }
 
-.system-status {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--red);
-    font-size: 13px;
-    font-weight: bold;
+.status{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--red);
+    font-size:13px;
+    font-weight:bold;
 }
 
-.blink-dot {
-    width: 10px;
-    height: 10px;
-    background: var(--red);
-    border-radius: 50%;
-    animation: blink 1.5s infinite;
+.dot{
+    width:11px;
+    height:11px;
+    background:var(--red);
+    border-radius:50%;
+    box-shadow:0 0 12px var(--red);
+    animation:pulse 1s infinite;
 }
 
-@keyframes blink {
-    0%,100% { opacity: 1; }
-    50% { opacity: .2; }
+@keyframes pulse{
+    0%,100%{opacity:1;transform:scale(1)}
+    50%{opacity:.25;transform:scale(.75)}
 }
 
-.ref {
-    direction: ltr;
-    color: var(--muted);
-    font-size: 12px;
+.ref{
+    color:#66717c;
+    font-size:11px;
+    direction:ltr;
+}
+
+/* WARNING */
+
+.warning{
+    position:relative;
+    margin:18px;
+    padding:20px;
+    border:1px solid #7c1515;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(120,0,0,.18),
+            transparent,
+            rgba(120,0,0,.18)
+        );
+    overflow:hidden;
+}
+
+.warning:after{
+    content:"";
+    position:absolute;
+    left:-100%;
+    top:0;
+    width:100%;
+    height:2px;
+    background:var(--red);
+    box-shadow:0 0 15px var(--red);
+    animation:scan 3s linear infinite;
+}
+
+@keyframes scan{
+    0%{left:-100%}
+    100%{left:100%}
+}
+
+.warning-title{
+    color:var(--red);
+    font-size:22px;
+    font-weight:bold;
+    text-shadow:0 0 10px rgba(255,0,0,.6);
+    animation:flicker 2s infinite;
+}
+
+@keyframes flicker{
+    0%,18%,20%,22%,70%,100%{opacity:1}
+    19%,21%{opacity:.35}
+}
+
+.warning-sub{
+    margin-top:8px;
+    color:#b55;
+    font-size:12px;
 }
 
 /* CONTENT */
 
-.content {
-    padding: 25px;
+.content{
+    padding:0 18px 25px;
+}
+
+.title{
+    font-size:21px;
+    color:#f1f5f8;
+    border-bottom:1px solid var(--border);
+    padding:15px 0;
+    margin-bottom:15px;
+}
+
+.subtitle{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.8;
+    margin-bottom:20px;
 }
 
 /* TERMINAL */
 
-.terminal {
-    background: #0b0e14;
-    border: 1px dashed #484f58;
-    border-radius: 5px;
-    padding: 15px;
-    margin-bottom: 25px;
-    direction: ltr;
-    text-align: left;
-    color: var(--green);
-    font-size: 13px;
-    line-height: 1.8;
-    overflow-x: auto;
+.terminal{
+    background:#020304;
+    border:1px solid #263029;
+    padding:15px;
+    direction:ltr;
+    text-align:left;
+    min-height:170px;
+    margin-bottom:20px;
+    overflow:hidden;
 }
 
-.terminal-blue {
-    color: #79c0ff;
+.terminal-head{
+    color:#68756d;
+    border-bottom:1px solid #1b241e;
+    padding-bottom:8px;
+    margin-bottom:10px;
 }
 
-.terminal-red {
-    color: #ff7b72;
+#terminalText{
+    color:var(--green);
+    font-size:12px;
+    line-height:1.8;
+    white-space:pre-wrap;
 }
 
-/* TITLE */
-
-h1 {
-    color: var(--light);
-    font-size: 21px;
-    margin-bottom: 15px;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 10px;
+.cursor{
+    display:inline-block;
+    width:7px;
+    height:13px;
+    background:var(--green);
+    animation:cursor .7s infinite;
 }
 
-/* ARTICLE */
+@keyframes cursor{
+    50%{opacity:0}
+}
 
-.article-box {
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.8;
-    margin-bottom: 25px;
-    text-align: justify;
+/* HEBREW */
+
+.hebrew-box{
+    background:#070a0d;
+    border:1px dashed #35403a;
+    padding:18px;
+    margin-bottom:20px;
+    direction:rtl;
+    text-align:right;
+}
+
+.hebrew-title{
+    color:#ff4545;
+    font-size:16px;
+    margin-bottom:12px;
+}
+
+.hebrew-box p{
+    color:#a8b2ba;
+    font-size:13px;
+    line-height:2;
+    margin-bottom:5px;
+}
+
+/* CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:22px;
+}
+
+.card{
+    background:#080b0f;
+    border:1px solid var(--border);
+    padding:15px;
+}
+
+.card-label{
+    color:#697680;
+    font-size:10px;
+    margin-bottom:8px;
+}
+
+.card-value{
+    color:#e6edf3;
+    font-size:17px;
+    font-weight:bold;
+}
+
+.red{
+    color:var(--red);
+}
+
+.green{
+    color:var(--green);
 }
 
 /* IMAGES */
 
-.profile-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin-bottom: 25px;
+.images-title{
+    color:#cdd5dc;
+    font-size:16px;
+    border-bottom:1px solid var(--border);
+    padding-bottom:10px;
+    margin-bottom:15px;
 }
 
-.image-card {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 7px;
-    padding: 12px;
-    text-align: center;
-    transition: .2s;
+.image-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin-bottom:25px;
 }
 
-.image-card:hover {
-    transform: translateY(-2px);
-    border-color: #484f58;
+.image-card{
+    position:relative;
+    background:#030506;
+    border:1px solid #293139;
+    padding:8px;
+    overflow:hidden;
 }
 
-.image-card img {
-    display: block;
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
-    border-radius: 5px;
-    border: 1px solid var(--border);
-    background: #21262d;
+.image-card:after{
+    content:"";
+    position:absolute;
+    left:0;
+    top:-5%;
+    width:100%;
+    height:3px;
+    background:var(--green);
+    box-shadow:0 0 12px var(--green);
+    opacity:.7;
+    animation:imageScan 3s linear infinite;
 }
 
-.caption {
-    margin-top: 10px;
-    color: var(--muted);
-    font-size: 12px;
+@keyframes imageScan{
+    0%{top:-5%}
+    100%{top:105%}
 }
 
-.image-status {
-    margin-top: 7px;
-    color: var(--green);
-    font-size: 11px;
+.image-card img{
+    display:block;
+    width:100%;
+    height:270px;
+    object-fit:cover;
+    background:#080b0e;
+    filter:
+        contrast(1.05)
+        brightness(.88);
+}
+
+.image-info{
+    padding:9px 4px 2px;
+    color:#687680;
+    font-size:10px;
+    direction:ltr;
+    text-align:left;
+}
+
+/* EVENT LOG */
+
+.event-title{
+    color:#cdd5dc;
+    font-size:16px;
+    border-bottom:1px solid var(--border);
+    padding-bottom:10px;
+    margin-bottom:10px;
+}
+
+.event-log{
+    background:#030506;
+    border:1px solid #20282e;
+    padding:12px;
+    height:180px;
+    overflow:hidden;
+    direction:ltr;
+    text-align:left;
+}
+
+.event{
+    color:#75818b;
+    font-size:11px;
+    line-height:1.8;
+}
+
+.event span{
+    color:var(--red);
 }
 
 /* TABLE */
 
-.data-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    font-size: 14px;
+.data-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+    font-size:13px;
 }
 
 .data-table th,
-.data-table td {
-    border: 1px solid var(--border);
-    padding: 11px 12px;
-    text-align: right;
+.data-table td{
+    border:1px solid var(--border);
+    padding:11px;
 }
 
-.data-table th {
-    width: 30%;
-    background: var(--panel2);
-    color: var(--light);
+.data-table th{
+    width:28%;
+    background:#11161c;
+    color:#9aa6b1;
 }
 
-.data-table td {
-    background: var(--bg);
+.data-table td{
+    background:#070a0e;
 }
 
-/* CONTACT LINKS */
-
-.contact-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: .2s;
+.contact{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    text-decoration:none;
+    color:var(--blue);
 }
 
-.contact-link:hover {
-    opacity: .75;
-    text-decoration: none;
+.icon{
+    width:28px;
+    height:28px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:#161c22;
+    border-radius:6px;
+    font-weight:bold;
 }
 
-.contact-icon {
-    width: 34px;
-    height: 34px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    background: var(--panel2);
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.facebook {
-    color: #58a6ff;
-}
-
-.instagram {
-    color: #ff7b72;
-}
-
-.phone {
-    color: #7ee787;
-}
-
-.active-status {
-    color: var(--red);
-    font-weight: bold;
+.phone{
+    color:var(--green);
 }
 
 /* FOOTER */
 
-footer {
-    text-align: center;
-    padding: 15px;
-    background: var(--panel2);
-    border-top: 1px solid var(--border);
-    color: var(--muted);
-    font-size: 11px;
+footer{
+    border-top:1px solid #252c33;
+    padding:15px;
+    text-align:center;
+    color:#4f5a63;
+    font-size:10px;
 }
 
 /* MOBILE */
 
-@media (max-width: 650px) {
+@media(max-width:700px){
 
-    body {
-        padding: 7px;
+    body{
+        padding:5px;
     }
 
-    header {
-        flex-direction: column;
-        align-items: flex-start;
+    header{
+        flex-direction:column;
+        align-items:flex-start;
     }
 
-    .content {
-        padding: 15px;
+    .content{
+        padding:0 10px 20px;
     }
 
-    h1 {
-        font-size: 18px;
+    .warning{
+        margin:10px;
     }
 
-    .profile-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
+    .warning-title{
+        font-size:18px;
     }
 
-    .image-card img {
-        height: 260px;
+    .cards{
+        grid-template-columns:1fr;
     }
 
-    .data-table {
-        font-size: 12px;
+    .image-grid{
+        grid-template-columns:1fr;
     }
 
-    .data-table th,
-    .data-table td {
-        padding: 9px 7px;
+    .image-card img{
+        height:250px;
     }
 
-    .data-table th {
-        width: 35%;
-    }
-}
-
-@media (max-width: 380px) {
-
-    .content {
-        padding: 11px;
+    .title{
+        font-size:18px;
     }
 
-    .image-card img {
-        height: 230px;
-    }
-
-    .terminal {
-        font-size: 11px;
-    }
 }
 
 </style>
@@ -332,154 +479,196 @@ footer {
 
 <header>
 
-    <div class="system-status">
-        <span class="blink-dot"></span>
-        <span>
-            DIGITAL ARCHIVE // SEC_LEVEL_HIGH
-        </span>
+    <div class="status">
+        <span class="dot"></span>
+        <span>SECURE DIGITAL ARCHIVE // ACTIVE</span>
     </div>
 
     <div class="ref">
-        REF: #OSINT-99482
+        NODE: CYBER-ARCHIVE-07
     </div>
 
 </header>
 
 
+<div class="warning">
+
+    <div class="warning-title">
+        ⚠ THREAT LEVEL // CRITICAL
+    </div>
+
+    <div class="warning-sub">
+        SYSTEM STATUS: HIGH PRIORITY EVENT DETECTED
+    </div>
+
+</div>
+
+
 <div class="content">
+
+
+<div class="title">
+    مركز الأرشيف والتحليل الرقمي
+</div>
+
+
+<div class="subtitle">
+
+    نظام تحليل رقمي متقدم لعرض السجلات والوسائط
+    والأحداث المسجلة داخل وحدة الأرشفة.
+
+</div>
 
 
 <!-- TERMINAL -->
 
 <div class="terminal">
 
-    <div>
-        SYSTEM INITIALIZING...
+    <div class="terminal-head">
+        ROOT@ARCHIVE-NODE:~$ secure_analysis
     </div>
 
-    <div>
-        CONNECTION: ESTABLISHED
-    </div>
+    <div id="terminalText"></div>
 
-    <div class="terminal-blue">
-        IMAGE ARCHIVE: /Images/
-    </div>
-
-    <div>
-        SCANNING IMAGE FILES...
-    </div>
-
-    <div id="systemStatus">
-        STATUS: LOADING...
-    </div>
+    <span class="cursor"></span>
 
 </div>
 
 
-<!-- TITLE -->
+<!-- HEBREW -->
 
-<h1>
-    تقرير الأرشيف والتحليل الرقمي
-</h1>
+<div class="hebrew-box">
+
+    <div class="hebrew-title">
+        מערכת ניתוח דיגיטלית
+    </div>
+
+    <p>
+        המערכת התחברה בהצלחה למסוף הארכיון.
+    </p>
+
+    <p>
+        מתבצע ניתוח של נתוני המדיה והפעילות הדיגיטלית.
+    </p>
+
+    <p>
+        זוהתה פעילות חריגה במערכת ונפתח אירוע בדיקה.
+    </p>
+
+    <p>
+        כל הנתונים מוצגים בממשק הארכיון לצורך ניתוח.
+    </p>
+
+    <p>
+        סטטוס מערכת: פעיל
+    </p>
+
+</div>
 
 
-<!-- DESCRIPTION -->
+<!-- CARDS -->
 
-<div class="article-box">
+<div class="cards">
 
-    واجهة أرشيف رقمية تجريبية لعرض المعلومات
-    والصور ووسائل التواصل المرتبطة بالسجل.
-    يتم تحميل الصور مباشرة من مجلد
-    <strong>Images</strong>
-    الموجود داخل المشروع.
+    <div class="card">
+        <div class="card-label">
+            SYSTEM STATUS
+        </div>
+
+        <div class="card-value green">
+            ONLINE
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="card-label">
+            THREAT LEVEL
+        </div>
+
+        <div class="card-value red">
+            CRITICAL
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="card-label">
+            ARCHIVE FILES
+        </div>
+
+        <div
+            class="card-value"
+            id="fileCounter"
+        >
+            00
+        </div>
+    </div>
 
 </div>
 
 
 <!-- IMAGES -->
 
-<div class="profile-grid">
+<div class="images-title">
+    MEDIA ARCHIVE // SCAN VIEW
+</div>
 
 
-    <!-- F.JPG -->
+<div class="image-grid">
+
 
     <div class="image-card">
 
         <img
             src="Images/f.jpg"
-            alt="Archive Image 1"
-            onerror="imageError(this)"
+            alt="Archive Media 01"
         >
 
-        <div class="caption">
-            الصورة الأساسية
-        </div>
-
-        <div class="image-status">
-            ● ARCHIVE FILE: f.jpg
+        <div class="image-info">
+            FILE: f.jpg // STATUS: LOADED
         </div>
 
     </div>
 
-
-    <!-- F2.JPG -->
 
     <div class="image-card">
 
         <img
             src="Images/f2.JPG"
-            alt="Archive Image 2"
-            onerror="imageError(this)"
+            alt="Archive Media 02"
         >
 
-        <div class="caption">
-            الصورة الثانية
-        </div>
-
-        <div class="image-status">
-            ● ARCHIVE FILE: f2.JPG
+        <div class="image-info">
+            FILE: f2.JPG // STATUS: LOADED
         </div>
 
     </div>
 
-
-    <!-- F3.JPG -->
 
     <div class="image-card">
 
         <img
             src="Images/f3.JPG"
-            alt="Archive Image 3"
-            onerror="imageError(this)"
+            alt="Archive Media 03"
         >
 
-        <div class="caption">
-            الصورة الثالثة
-        </div>
-
-        <div class="image-status">
-            ● ARCHIVE FILE: f3.JPG
+        <div class="image-info">
+            FILE: f3.JPG // STATUS: LOADED
         </div>
 
     </div>
 
-
-    <!-- F4.JPG -->
 
     <div class="image-card">
 
         <img
             src="Images/f4.JPG"
-            alt="Archive Image 4"
-            onerror="imageError(this)"
+            alt="Archive Media 04"
         >
 
-        <div class="caption">
-            الصورة الرابعة
-        </div>
-
-        <div class="image-status">
-            ● ARCHIVE FILE: f4.JPG
+        <div class="image-info">
+            FILE: f4.JPG // STATUS: LOADED
         </div>
 
     </div>
@@ -487,162 +676,137 @@ footer {
 </div>
 
 
-<!-- INFORMATION TABLE -->
+<!-- EVENT LOG -->
+
+<div class="event-title">
+    EVENT LOG // LIVE STREAM
+</div>
+
+<div
+    class="event-log"
+    id="eventLog"
+></div>
+
+
+<!-- INFORMATION -->
 
 <table class="data-table">
 
+<tr>
 
-    <!-- NAME -->
+    <th>
+        ARCHIVE ID
+    </th>
 
-    <tr>
+    <td>
+        CYB-ARCH-99482
+    </td>
 
-        <th>
-            الاسم
-        </th>
-
-        <td>
-            شخصية تجريبية
-        </td>
-
-    </tr>
+</tr>
 
 
-    <!-- FACEBOOK -->
+<tr>
 
-    <tr>
+    <th>
+        Facebook
+    </th>
 
-        <th>
-            Facebook
-        </th>
+    <td>
 
-        <td>
+        <a
+            href="https://www.facebook.com/"
+            target="_blank"
+            class="contact"
+        >
 
-            <a
-                href="https://www.facebook.com/"
-                target="_blank"
-                class="contact-link facebook"
-            >
-
-                <span class="contact-icon">
-                    f
-                </span>
-
-                Facebook
-
-            </a>
-
-        </td>
-
-    </tr>
-
-
-    <!-- INSTAGRAM -->
-
-    <tr>
-
-        <th>
-            Instagram
-        </th>
-
-        <td>
-
-            <a
-                href="https://www.instagram.com/"
-                target="_blank"
-                class="contact-link instagram"
-            >
-
-                <span class="contact-icon">
-                    ◎
-                </span>
-
-                Instagram
-
-            </a>
-
-        </td>
-
-    </tr>
-
-
-    <!-- PHONE -->
-
-    <tr>
-
-        <th>
-            الهاتف
-        </th>
-
-        <td>
-
-            <a
-                href="tel:+201000000000"
-                class="contact-link phone"
-                dir="ltr"
-            >
-
-                <span class="contact-icon">
-                    ☎
-                </span>
-
-                +20 100 000 0000
-
-            </a>
-
-        </td>
-
-    </tr>
-
-
-    <!-- STATUS -->
-
-    <tr>
-
-        <th>
-            حالة النظام
-        </th>
-
-        <td>
-
-            <span class="active-status">
-                ACTIVE
+            <span class="icon">
+                f
             </span>
 
-        </td>
+            Facebook
 
-    </tr>
+        </a>
+
+    </td>
+
+</tr>
 
 
-    <!-- IMAGE COUNT -->
+<tr>
 
-    <tr>
+    <th>
+        Instagram
+    </th>
 
-        <th>
-            ملفات الصور
-        </th>
+    <td>
 
-        <td id="imageCount">
-            جارٍ التحقق...
-        </td>
+        <a
+            href="https://www.instagram.com/"
+            target="_blank"
+            class="contact"
+        >
 
-    </tr>
+            <span class="icon">
+                ◎
+            </span>
+
+            Instagram
+
+        </a>
+
+    </td>
+
+</tr>
+
+
+<tr>
+
+    <th>
+        Telephone
+    </th>
+
+    <td>
+
+        <a
+            href="tel:+201000000000"
+            class="contact phone"
+            dir="ltr"
+        >
+
+            <span class="icon">
+                ☎
+            </span>
+
+            +20 100 000 0000
+
+        </a>
+
+    </td>
+
+</tr>
+
+
+<tr>
+
+    <th>
+        Network Status
+    </th>
+
+    <td class="red">
+        HIGH PRIORITY
+    </td>
+
+</tr>
 
 
 </table>
 
+
 </div>
 
 
-<!-- FOOTER -->
-
 <footer>
-
-    Digital Archive System
-
-    <br>
-
-    All Rights Reserved
-
+    DIGITAL ARCHIVE // SECURE TERMINAL
 </footer>
 
 
@@ -651,146 +815,199 @@ footer {
 
 <script>
 
-/* =========================
-   IMAGE FILES
-========================= */
+/* ==========================
+   TERMINAL ANIMATION
+========================== */
 
-const imageFiles = [
+const terminalLines = [
 
-    "Images/f.jpg",
-
-    "Images/f2.JPG",
-
-    "Images/f3.JPG",
-
-    "Images/f4.JPG"
+    "Initializing secure archive...",
+    "Loading encrypted media index...",
+    "Scanning available records...",
+    "Connecting to analysis node...",
+    "Verifying archive integrity...",
+    "Media subsystem initialized.",
+    "Hebrew analysis module loaded.",
+    "Event monitoring enabled.",
+    "System ready."
 
 ];
 
+let lineIndex = 0;
+let charIndex = 0;
 
-/* =========================
-   CHECK IMAGES
-========================= */
+const terminal =
+    document.getElementById("terminalText");
 
-window.addEventListener(
-    "load",
-    function() {
 
-        let loaded = 0;
+function typeTerminal(){
 
-        imageFiles.forEach(
-            function(file) {
+    if(lineIndex >= terminalLines.length){
+        setTimeout(()=>{
+            terminal.innerHTML = "";
+            lineIndex = 0;
+            charIndex = 0;
+            typeTerminal();
+        },3000);
 
-                const test =
-                    new Image();
+        return;
+    }
 
-                test.onload =
-                    function() {
+    const current =
+        terminalLines[lineIndex];
 
-                        loaded++;
+    if(charIndex < current.length){
 
-                        updateStatus(
-                            loaded
-                        );
+        terminal.innerHTML +=
+            current.charAt(charIndex);
 
-                    };
+        charIndex++;
 
-                test.onerror =
-                    function() {
+        setTimeout(
+            typeTerminal,
+            25
+        );
 
-                        updateStatus(
-                            loaded
-                        );
+    }else{
 
-                    };
+        terminal.innerHTML += "\n";
 
-                test.src =
-                    file +
-                    "?v=" +
-                    Date.now();
+        lineIndex++;
+        charIndex = 0;
+
+        setTimeout(
+            typeTerminal,
+            400
+        );
+
+    }
+
+}
+
+typeTerminal();
+
+
+/* ==========================
+   EVENT LOG
+========================== */
+
+const events = [
+
+    "ARCHIVE NODE INITIALIZED",
+    "MEDIA INDEX UPDATED",
+    "SECURE CHANNEL ACTIVE",
+    "ANALYSIS ENGINE STARTED",
+    "HEBREW MODULE LOADED",
+    "MEDIA SCAN COMPLETE",
+    "INTEGRITY CHECK PASSED",
+    "EVENT MONITOR ACTIVE",
+    "SYSTEM HEARTBEAT OK",
+    "ARCHIVE SYNCHRONIZED"
+];
+
+const eventLog =
+    document.getElementById("eventLog");
+
+
+function addEvent(){
+
+    const item =
+        document.createElement("div");
+
+    item.className = "event";
+
+    const time =
+        new Date().toLocaleTimeString();
+
+    item.innerHTML =
+        "[" + time + "] " +
+        "<span>></span> " +
+        events[
+            Math.floor(
+                Math.random() *
+                events.length
+            )
+        ];
+
+    eventLog.prepend(item);
+
+    while(eventLog.children.length > 8){
+        eventLog.removeChild(
+            eventLog.lastChild
+        );
+    }
+
+}
+
+setInterval(
+    addEvent,
+    1100
+);
+
+addEvent();
+
+
+/* ==========================
+   FILE COUNTER
+========================== */
+
+const images = document.querySelectorAll(
+    ".image-card img"
+);
+
+let loadedImages = 0;
+
+images.forEach(img => {
+
+    if(img.complete){
+
+        if(img.naturalWidth > 0){
+            loadedImages++;
+        }
+
+    }else{
+
+        img.addEventListener(
+            "load",
+            function(){
+
+                loadedImages++;
+
+                document.getElementById(
+                    "fileCounter"
+                ).textContent =
+                    String(loadedImages)
+                    .padStart(2,"0");
 
             }
         );
 
     }
-);
 
+});
 
-/* =========================
-   UPDATE STATUS
-========================= */
+setTimeout(function(){
 
-function updateStatus(count) {
+    loadedImages = 0;
 
-    const status =
-        document.getElementById(
-            "systemStatus"
-        );
+    images.forEach(img => {
 
-    const imageCount =
-        document.getElementById(
-            "imageCount"
-        );
+        if(img.complete &&
+           img.naturalWidth > 0){
 
-    status.textContent =
-        "STATUS: " +
-        count +
-        "/4 IMAGE FILES LOADED";
+            loadedImages++;
 
-    imageCount.textContent =
-        count +
-        " / 4 ملفات تم تحميلها";
+        }
 
-}
+    });
 
+    document.getElementById(
+        "fileCounter"
+    ).textContent =
+        String(loadedImages)
+        .padStart(2,"0");
 
-/* =========================
-   IMAGE ERROR
-========================= */
-
-function imageError(img) {
-
-    img.style.display =
-        "none";
-
-    const message =
-        document.createElement(
-            "div"
-        );
-
-    message.style.height =
-        "280px";
-
-    message.style.display =
-        "flex";
-
-    message.style.alignItems =
-        "center";
-
-    message.style.justifyContent =
-        "center";
-
-    message.style.background =
-        "#0b0e14";
-
-    message.style.color =
-        "#ff7b72";
-
-    message.style.borderRadius =
-        "5px";
-
-    message.style.fontSize =
-        "12px";
-
-    message.textContent =
-        "IMAGE FILE NOT FOUND";
-
-    img.parentNode.insertBefore(
-        message,
-        img
-    );
-
-}
+},800);
 
 </script>
 
